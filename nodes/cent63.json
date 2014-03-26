@@ -1,5 +1,8 @@
 {"run_list":[
     "yum",
-    "recipe[php55]"   
+    "base",
+    "apache",
+    "mysql",
+    "php55"        
     ]
 }
