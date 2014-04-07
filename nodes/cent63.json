@@ -1,4 +1,8 @@
-{"run_list":[
+{
+  "apache":{
+    "env" : ".local"
+},
+  "run_list":[
     "yum",
     "base",
     "apache",

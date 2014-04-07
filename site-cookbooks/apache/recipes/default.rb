@@ -11,3 +11,14 @@ package "httpd" do
   action :install
   version "2.2.15-29.el6.centos"
 end
+
+service "httpd" do
+  supports :status => true,:restart => true,:reload => true
+  action [:enable,:start]
+end
+
+template "/etc/httpd/conf/httpd.conf" do 
+  owner "apache"
+  group "apache"
+  notifies :reload,'service[httpd]'
+end
