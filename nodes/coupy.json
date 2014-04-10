@@ -1,0 +1,12 @@
+{
+  "apache":{
+    "env" : ".local"
+},
+  "run_list":[
+    "yum",
+    "base",
+    "apache",
+    "mysql",
+    "php55"        
+    ]
+}
