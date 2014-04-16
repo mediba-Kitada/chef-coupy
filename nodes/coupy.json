@@ -3,7 +3,9 @@
     "env" : ".local"
 },
   "mysql":{
-    "coupy_password":"hogehoge"
+    "coupy_password":"hogehoge",
+    "bdb_password":"hogehoge",
+    "async_password":"hogehoge"
 },
   "run_list":[
     "yum",

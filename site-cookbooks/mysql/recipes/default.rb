@@ -40,3 +40,27 @@ mysql_database_user "coupy_view" do
   privileges [:all]
   action [:create, :grant]
 end
+
+mysql_database "pass" do
+  connection mysql_connection_info
+  action :create
+end
+
+mysql_database_user "cake_admin" do
+  connection mysql_connection_info
+  password node["mysql"]["bdb_password"]
+  privileges [:all]
+  action [:create, :grant]
+end
+
+mysql_database "pass_async" do
+  connection mysql_connection_info
+  action :create
+end
+
+mysql_database_user "pass_async" do
+  connection mysql_connection_info
+  password node["mysql"]["async_password"]
+  privileges [:all]
+  action [:create, :grant]
+end
