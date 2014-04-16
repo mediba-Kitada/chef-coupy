@@ -2,8 +2,12 @@
   "apache":{
     "env" : ".local"
 },
+  "mysql":{
+    "coupy_password":"hogehoge"
+},
   "run_list":[
     "yum",
+    "database",
     "base",
     "apache",
     "mysql",
