@@ -29,3 +29,59 @@ yum_repository 'remi-php55' do
   mirrorlist 'http://rpms.famillecollet.com/enterprise/6/php55/mirror'
   gpgkey 'http://rpms.famillecollet.com/RPM-GPG-KEY-remi'
 end
+
+package "git" do
+  action :install
+end
+
+directory "/var/www/coupy" do
+  owner "apache"
+  group "apache"
+  action :create
+end
+
+directory "/home/vagrant/git" do
+  owner "vagrant"
+  group "vagrant"
+  action :create
+end
+
+directory "/home/vagrant/.ssh" do
+  owner "vagrant"
+  group "vagrant"
+  action :create
+end
+
+cookbook_file "/home/vagrant/.ssh/id_rsa" do
+  mode 00600
+  owner "vagrant"
+  group "vagrant"
+end
+
+cookbook_file "/home/vagrant/.ssh/id_rsa.pub" do
+  mode 00644
+  owner "vagrant"
+  group "vagrant"
+end
+
+cookbook_file "/home/vagrant/.ssh/config" do
+  mode 00644
+  owner "vagrant"
+  group "vagrant"
+end
+
+cookbook_file "/etc/sudoers" do
+  mode 00440
+  owner "root"
+  group "root"
+end
+
+git "/home/vagrant/git" do
+  repo "git@github.com:mediba-system/coupy.git"
+  reference "develop"
+  action :checkout
+end
+
+link "/var/www/coupy/coupy" do
+  to "/home/vagrant/git/coupy/coupy"
+end
