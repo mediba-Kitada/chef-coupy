@@ -66,3 +66,38 @@ mysql_database_user "pass_async" do
   privileges [:all]
   action [:create, :grant]
 end
+
+bash "migrate-coupyDB" do
+  only_if "find /var/www/coupy/doc/ddl/cpydb.coupy.ddl"
+  code <<-EOL
+    mysql -u root coupy < /var/www/coupy/doc/ddl/cpydb.coupy.ddl
+  EOL
+end
+
+bash "manipulate-coupyDB" do
+  only_if "find /var/www/coupy/doc/dml/cpydb.coupy.dml"
+  code <<-EOL
+    mysql -u root coupy < /var/www/coupy/doc/dml/cpydb.coupy.dml
+  EOL
+end
+
+bash "migrate-bdb" do
+  only_if "find /var/www/coupy/doc/ddl/bdb.pass.coupon.ddl"
+  code <<-EOL
+    mysql -u root pass < /var/www/coupy/doc/ddl/bdb.pass.coupon.ddl
+  EOL
+end
+
+bash "migrate-asyncDB" do
+  only_if "find /var/www/coupy/doc/ddl/asyncdb.pass.coupon.ddl"
+  code <<-EOL
+    mysql -u root pass < /var/www/coupy/doc/ddl/asyncdb.pass.coupon.ddl
+  EOL
+end
+
+bash "manipulate-async" do
+  only_if "find /var/www/coupy/doc/dml/asyncdb.pass.coupon.dml"
+  code <<-EOL
+    mysql -u root pass_async < /var/www/coupy/doc/dml/asyncdb.pass.coupon.dml
+  EOL
+end
