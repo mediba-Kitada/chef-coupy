@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'database::mysql'
+
 package "mysql-server" do
   action :install
   #version "5.1.67-1.el6_3"
