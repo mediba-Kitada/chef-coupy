@@ -9,7 +9,7 @@
 
 package "httpd" do
   action :install
-  version "2.2.15-29.el6.centos"
+  #version "2.2.15-29.el6.centos"
 end
 
 service "httpd" do
