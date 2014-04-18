@@ -30,11 +30,23 @@ yum_repository 'remi-php55' do
   gpgkey 'http://rpms.famillecollet.com/RPM-GPG-KEY-remi'
 end
 
+link "/etc/localtime" do
+  only_if "find /etc/localtime"
+  to "/usr/share/zoneinfo/Asia/Tokyo"
+end
+
 package "git" do
   action :install
 end
 
 directory "/var/www/coupy" do
+  user "apache"
+  group "apache"
+  action :create
+end
+
+directory "/var/www/coupy/coupy/assets" do
+  mode 00777
   user "apache"
   group "apache"
   action :create

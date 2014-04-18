@@ -13,3 +13,9 @@
     action :install
   end
 end
+
+template "/etc/php.ini" do
+  owner "apache"
+  group "apache"
+  notifies :reload,'service[httpd]'
+end
