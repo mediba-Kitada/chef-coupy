@@ -33,3 +33,17 @@ end
 package "git" do
   action :install
 end
+
+remote_file "/tmp/yii.tar.gz" do
+  source "https://github.com/yiisoft/yii/releases/download/1.1.14/yii-1.1.14.f0fee9.tar.gz"
+end
+
+bash "instal-yii" do
+  code <<-EOL
+    tar xfvz /tmp/yii.tar.gz -C /var/www/
+  EOL
+end
+
+link "/var/www/yii" do
+  to "/var/www/yii-1.1.14.f0fee9"
+end
