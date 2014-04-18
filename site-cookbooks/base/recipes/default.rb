@@ -67,6 +67,7 @@ link "/var/www/yii" do
 end
 
 bash "install-coupy" do
+  only_if "find /var/www/coupy/coupy/protected/commands/shell/init.sh"
   code <<-EOL
     sh /var/www/coupy/coupy/protected/commands/shell/init.sh
   EOL
