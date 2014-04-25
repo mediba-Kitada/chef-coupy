@@ -88,6 +88,13 @@ bash "migrate-bdb" do
   EOL
 end
 
+bash "manipulate-bdb" do
+  only_if "find /var/www/coupy/doc/dml/bdb.pass.coupon.dml"
+  code <<-EOL
+    mysql -u root pass < /var/www/coupy/doc/dml/bdb.pass.coupon.dml
+  EOL
+end
+
 bash "migrate-asyncDB" do
   only_if "find /var/www/coupy/doc/ddl/asyncdb.pass.coupon.ddl"
   code <<-EOL
