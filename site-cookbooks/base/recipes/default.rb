@@ -39,6 +39,19 @@ package "git" do
   action :install
 end
 
+user "apache" do
+  comment "apache"
+  shell "/sbin/nologin"
+  password nil
+  supports :create => true
+end
+
+group "apache" do
+  gid 48
+  members ['apache']
+  action :create
+end
+
 directory "/var/www/coupy" do
   user "apache"
   group "apache"
@@ -46,6 +59,13 @@ directory "/var/www/coupy" do
 end
 
 directory "/var/www/coupy/coupy/assets" do
+  mode 00777
+  user "apache"
+  group "apache"
+  action :create
+end
+
+directory "/var/runtime" do
   mode 00777
   user "apache"
   group "apache"
