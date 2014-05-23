@@ -1,0 +1,14 @@
+{
+  "mysql":{
+    "aws_password":"awspassword"
+},
+  "run_list":[
+    "yum",
+    "database",
+    "base",
+    "apache",
+    "mysql",
+    "rsyslog",
+    "php55"
+    ]
+}

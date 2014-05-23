@@ -17,8 +17,8 @@ service "httpd" do
   action [:enable,:start]
 end
 
-template "/etc/httpd/conf/httpd.conf" do 
-  owner "apache"
-  group "apache"
-  notifies :reload,'service[httpd]'
-end
+#template "/etc/httpd/conf/httpd.conf" do 
+#  owner "apache"
+#  group "apache"
+#  notifies :reload,'service[httpd]'
+#end

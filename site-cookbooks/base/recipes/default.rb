@@ -35,8 +35,10 @@ link "/etc/localtime" do
   to "/usr/share/zoneinfo/Asia/Tokyo"
 end
 
-package "git" do
-  action :install
+%w{git telnet wget}.each do |pkg|
+  package pkg do
+    action :install
+  end
 end
 
 user "apache" do
@@ -52,26 +54,6 @@ group "apache" do
   action :create
 end
 
-directory "/var/www/coupy" do
-  user "apache"
-  group "apache"
-  action :create
-end
-
-directory "/var/www/coupy/coupy/assets" do
-  mode 00777
-  user "apache"
-  group "apache"
-  action :create
-end
-
-directory "/var/runtime" do
-  mode 00777
-  user "apache"
-  group "apache"
-  action :create
-end
-
 remote_file "/tmp/yii.tar.gz" do
   source "https://github.com/yiisoft/yii/releases/download/1.1.14/yii-1.1.14.f0fee9.tar.gz"
 end
@@ -84,11 +66,4 @@ end
 
 link "/var/www/yii" do
   to "/var/www/yii-1.1.14.f0fee9"
-end
-
-bash "install-coupy" do
-  only_if "find /var/www/coupy/coupy/protected/commands/shell/init.sh"
-  code <<-EOL
-    sh /var/www/coupy/coupy/protected/commands/shell/init.sh
-  EOL
 end
