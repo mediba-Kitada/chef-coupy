@@ -9,6 +9,7 @@
     "apache",
     "mysql",
     "rsyslog",
-    "php55"
+    "php55",
+    "kvs"
     ]
 }
