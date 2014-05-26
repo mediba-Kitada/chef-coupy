@@ -1009,12 +1009,12 @@ NameVirtualHost *:80
 #</VirtualHost>
 
 <VirtualHost *:80>
-    ServerAdmin h-morita@mediba.jp
+    ServerAdmin kitada@mediba.jp
     DocumentRoot /var/www/pass.auone.jp
-    ServerName pass.local.auone.jp
-    ServerAlias pass.local.auone.jp
-    ErrorLog /var/log/httpd/pass.auone.jp-error_log
-    CustomLog /var/log/httpd/pass.auone.jp-access_log combined
+    ServerName pass.<%= node['apache']['env'] %>.auone.jp
+    ServerAlias pass.<%= node['apache']['env'] %>.auone.jp
+    ErrorLog /var/log/httpd/pass.<%= node['apache']['env'] %>.auone.jp-error_log
+    CustomLog /var/log/httpd/pass.<%= node['apache']['env'] %>.auone.jp-access_log combined
     <Directory "/var/www/pass.auone.jp">
 	Options FollowSymLinks
 	AllowOverride All
@@ -1023,20 +1023,22 @@ NameVirtualHost *:80
     ProxyPass /ajax/search/     http://192.168.34.130:8180/mcn/all/
     ProxyPassReverse /ajax/search/      http://192.168.34.130:8180/mcn/all/
 
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
+
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerAdmin y-oe@mediba.jp
+    ServerAdmin kitada@mediba.jp
     DocumentRoot /var/www/api.pass.auone.jp
-    ServerName api.pass.local.auone.jp
-    ServerAlias api.pass.local.auone.jp
-    ErrorLog /var/log/httpd/api.pass.auone.jp-error_log
-    CustomLog /var/log/httpd/api.pass.auone.jp-access_log combined
+    ServerName api.pass.<%= node['apache']['env'] %>.auone.jp
+    ServerAlias api.pass.<%= node['apache']['env'] %>.auone.jp
+    ErrorLog /var/log/httpd/api.pass.<%= node['apache']['env'] %>.auone.jp-error_log
+    CustomLog /var/log/httpd/api.pass.<%= node['apache']['env'] %>.auone.jp-access_log combined
     <Directory />
 	Options FollowSymLinks
 	AllowOverride All
     </Directory>
-    SetEnv APPLICATION_ENV local
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
 </VirtualHost>
 
 #<VirtualHost *:80>
@@ -1093,17 +1095,17 @@ NameVirtualHost *:80
 #</VirtualHost>
 #
 <VirtualHost *:80>
-    ServerAdmin watabe@mediba.jp
+    ServerAdmin kitad@mediba.jp
     DocumentRoot /var/www/coupy/coupy
-    ServerName coupy<%= node['apache']['env'] %>.mediba.jp
-    ServerAlias coupy<%= node['apache']['env'] %>.mediba.jp
+    ServerName coupy.<%= node['apache']['env'] %>.mediba.jp
+    ServerAlias coupy.<%= node['apache']['env'] %>.mediba.jp
     ErrorLog logs/coupy<%= node['apache']['env'] %>.mediba.jp-error_log
     CustomLog logs/coupy<%= node['apache']['env'] %>.mediba.jp-access_log common
     <Directory />
 	Options FollowSymLinks
 	AllowOverride All
     </Directory>
-    SetEnv APPLICATION_ENV <%= node['apache']['env'] %>
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
 </VirtualHost>
 
 #<VirtualHost *:80>
