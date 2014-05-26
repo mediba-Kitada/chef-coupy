@@ -1041,6 +1041,20 @@ NameVirtualHost *:80
     SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
 </VirtualHost>
 
+<VirtualHost *:80>
+    ServerAdmin kitada@mediba.jp
+    DocumentRoot /var/www/cdn-img
+    ServerName cdn-img.<%= node['apache']['env'] %>.auone.jp
+    ServerAlias cdn-img.<%= node['apache']['env'] %>.auone.jp
+    ErrorLog /var/log/httpd/cdn-img.<%= node['apache']['env'] %>.auone.jp-error_log
+    CustomLog /var/log/httpd/cdn-img.<%= node['apache']['env'] %>.auone.jp-access_log combined
+    <Directory />
+	Options FollowSymLinks
+	AllowOverride All
+    </Directory>
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
+</VirtualHost>
+
 #<VirtualHost *:80>
 #    ServerAdmin h-morita@mediba.jp
 #    DocumentRoot /var/www/ctest.mdev.auone.jp
