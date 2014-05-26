@@ -1008,6 +1008,27 @@ NameVirtualHost *:80
 #    CustomLog logs/dummy-host.example.com-access_log common
 #</VirtualHost>
 
+# 0821資産
+<VirtualHost *:80>
+    ServerAdmin kitada@mediba.jp
+    DocumentRoot /var/www/pass.auone.jp
+    ServerName point.pass.<%= node['apache']['env'] %>.auone.jp
+    ServerAlias point.pass.<%= node['apache']['env'] %>.auone.jp
+    ErrorLog /var/log/httpd/point.pass.<%= node['apache']['env'] %>.auone.jp-error_log
+    CustomLog /var/log/httpd/point.pass.<%= node['apache']['env'] %>.auone.jp-access_log combined
+    <Directory "/var/www/pass.auone.jp">
+	Options FollowSymLinks
+	AllowOverride All
+    </Directory>
+
+    ProxyPass /ajax/search/     http://192.168.34.130:8180/mcn/all/
+    ProxyPassReverse /ajax/search/      http://192.168.34.130:8180/mcn/all/
+
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
+
+</VirtualHost>
+
+# 旧資産
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
     DocumentRoot /var/www/pass.auone.jp
@@ -1027,6 +1048,22 @@ NameVirtualHost *:80
 
 </VirtualHost>
 
+# 0821資産
+<VirtualHost *:80>
+    ServerAdmin kitada@mediba.jp
+    DocumentRoot /var/www/api.pass.auone.jp
+    ServerName api.point.pass.<%= node['apache']['env'] %>.auone.jp
+    ServerAlias api.point.pass.<%= node['apache']['env'] %>.auone.jp
+    ErrorLog /var/log/httpd/api.point.pass.<%= node['apache']['env'] %>.auone.jp-error_log
+    CustomLog /var/log/httpd/api.point.pass.<%= node['apache']['env'] %>.auone.jp-access_log combined
+    <Directory />
+	Options FollowSymLinks
+	AllowOverride All
+    </Directory>
+    SetEnv APPLICATION_ENV <%= node['apache']['appenv'] %>
+</VirtualHost>
+
+# 旧資産
 <VirtualHost *:80>
     ServerAdmin kitada@mediba.jp
     DocumentRoot /var/www/api.pass.auone.jp
