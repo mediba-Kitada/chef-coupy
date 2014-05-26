@@ -12,6 +12,13 @@ package "httpd" do
   #version "2.2.15-29.el6.centos"
 end
 
+directory "/var/log/httpd" do
+  mode 00777
+  user "apache"
+  group "apache"
+  action :create
+end
+
 service "httpd" do
   supports :status => true,:restart => true,:reload => true
   action [:enable,:start]
