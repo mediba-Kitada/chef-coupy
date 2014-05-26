@@ -35,9 +35,10 @@ link "/etc/localtime" do
   to "/usr/share/zoneinfo/Asia/Tokyo"
 end
 
-%w{git telnet wget}.each do |pkg|
+%w{git telnet wget zsh nkf tig vim}.each do |pkg|
   package pkg do
     action :install
+    options "--enablerepo=epel"
   end
 end
 
