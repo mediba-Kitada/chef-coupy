@@ -39,7 +39,7 @@ $IncludeConfig /etc/rsyslog.d/*.conf
 
 # Log anything (except mail) of level info or higher.
 # Don't log private authentication messages!
-*.info;mail.none;authpriv.none;cron.none;local0.none,local1.none /var/log/messages
+*.info;mail.none;authpriv.none;cron.none;local0.none,local1.none,local5.none /var/log/messages
 
 # The authpriv file has restricted access.
 authpriv.*                                              /var/log/secure
@@ -82,4 +82,4 @@ local7.*                                                /var/log/boot.log
 # ap.log
 local0.*                                                /var/log/ap/ap_coupy.log
 local1.*                                                /var/log/ap/ap_coupy_console.log
-local5.*                                                /var/log/ap/ap.log
+local5.*                                                /var/log/ap/ap.log
