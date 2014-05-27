@@ -1,7 +1,10 @@
 {
   "mysql":{
     "aws_password":"awspassword"
-},
+  },
+  "apache":{
+    "gateway":"20.0.0.1"
+  },
   "run_list":[
     "yum",
     "database",

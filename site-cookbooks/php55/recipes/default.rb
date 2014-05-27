@@ -19,3 +19,17 @@ template "/etc/php.ini" do
   group "apache"
   notifies :reload,'service[httpd]'
 end
+
+directory "/var/www/apc-info-monitor" do
+  mode 00766
+  user "apache"
+  group "apache"
+  action :create
+end
+
+cookbook_file "/var/www/apc-info-monitor/apc.php" do
+  owner "apache"
+  group "apache"
+  mode 00755
+  notifies :restart,'service[httpd]'
+end

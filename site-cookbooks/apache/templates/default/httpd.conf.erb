@@ -1171,25 +1171,6 @@ NameVirtualHost *:80
 #<VirtualHost *:80>
 #    ServerAdmin h-morita@mediba.jp
 
-
-#<VirtualHost *:80>
-#    ServerAdmin h-morita@mediba.jp
-#    DocumentRoot /var/www/special.pass.auone.jp
-#<VirtualHost *:80>
-#    ServerAdmin h-morita@mediba.jp
-#    DocumentRoot /var/www/special.pass.auone.jp
-#    ServerName special.pass.auone.jp
-#    ServerAlias special.pass.mdev.auone.jp
-#    ErrorLog logs/special.pass.auone.jp-error_log
-#    CustomLog logs/special.auone.jp-access_log common
-#    ErrorLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/special.pass.auone.jp-error_log.%Y%m%d 86400 540\'"
-#    CustomLog "|/bin/su mediu -c \'/usr/sbin/rotatelogs -f /var/log/httpd/special.pass.auone.jp-access_log.%Y%m%d 86400 540\'" combined
-#        <Directory />
-#                Options FollowSymLinks
-#                AllowOverride All
-#        </Directory>
-#</VirtualHost>
-
 <VirtualHost *:80>
     ServerAdmin y-oe@mediba.jp
     DocumentRoot /var/www/cdn-img
@@ -1204,15 +1185,18 @@ NameVirtualHost *:80
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerAdmin y-oe@mediba.jp
-    DocumentRoot /var/www/sample
-    ServerName sample.local.mediba.jp
-    ServerAlias sample.local.mediba.jp
-    ErrorLog logs/sample.local.mediba.jp-error_log
-    CustomLog logs/sample.local.mediba.jp-access_log common
+    ServerAdmin kitada@mediba.jp
+    DocumentRoot /var/www/apc-info-monitor
+    ServerName apc.local.mediba.jp
+    ServerAlias apc.local.mediba.jp
+    ErrorLog logs/apc.local.mediba.jp-error_log
+    CustomLog logs/apc.local.mediba.jp-access_log common
     <Directory />
         Options FollowSymLinks
         AllowOverride All
+        Order deny,allow
+        Deny from all
+        Allow from <%= node['apache']['gateway'] %>
     </Directory>
 </VirtualHost>
 
