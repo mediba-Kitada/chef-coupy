@@ -1660,3 +1660,13 @@ soap.wsdl_cache_ttl=86400
 ;
 
 ;extension=mongo.so
+
+[cache]
+; zendopcache.ini
+zend_extension=opcache.so
+; opcacheが利用するメモリのサイズ(MB)
+opcache.memory_consumption=512
+
+; apcu.ini
+extension=apcu.so
+apc.shm_size=512M
